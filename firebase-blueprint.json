@@ -1,0 +1,55 @@
+{
+  "entities": {
+    "Ticker": {
+      "title": "Ticker",
+      "description": "A stock ticker being monitored for SEC filings.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier for the ticker." },
+        "symbol": { "type": "string", "description": "Stock symbol (e.g., AAPL)." },
+        "name": { "type": "string", "description": "Company name." },
+        "addedAt": { "type": "string", "format": "date-time", "description": "When the ticker was added." },
+        "addedBy": { "type": "string", "description": "User ID who added the ticker." },
+        "generatePodcast": { "type": "integer", "description": "Whether to generate podcasts (0 or 1)." },
+        "generateShorts": { "type": "integer", "description": "Whether to generate shorts (0 or 1)." }
+      },
+      "required": ["id", "symbol", "addedAt", "addedBy"]
+    },
+    "Filing": {
+      "title": "Filing",
+      "description": "An SEC filing retrieved for a monitored ticker.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier for the filing." },
+        "ticker": { "type": "string", "description": "Stock symbol." },
+        "formType": { "type": "string", "description": "Type of filing (e.g., 10-Q)." },
+        "filingDate": { "type": "string", "description": "Date of the filing." },
+        "accessionNumber": { "type": "string", "description": "SEC accession number." },
+        "url": { "type": "string", "description": "URL to the filing." },
+        "rawContent": { "type": "string", "description": "Raw text content of the filing." },
+        "summary": { "type": "string", "description": "AI-generated summary." },
+        "podcastScript": { "type": "string", "description": "JSON string of the podcast script." },
+        "shortsScript": { "type": "string", "description": "JSON string of the shorts script." },
+        "audioBase64": { "type": "string", "description": "Base64 encoded podcast audio." },
+        "shortsAudioBase64": { "type": "string", "description": "Base64 encoded shorts audio." },
+        "shortsVideoBase64": { "type": "string", "description": "Base64 encoded shorts video." },
+        "status": { "type": "string", "description": "Current processing status." },
+        "error": { "type": "string", "description": "Error message if processing failed." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the record was created." },
+        "companyName": { "type": "string", "description": "Name of the company." },
+        "processingStartedAt": { "type": "string", "format": "date-time", "description": "When processing started." }
+      },
+      "required": ["id", "ticker", "formType", "filingDate", "accessionNumber", "url", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/tickers/{tickerId}": {
+      "schema": "Ticker",
+      "description": "Collection of monitored stock tickers."
+    },
+    "/filings/{filingId}": {
+      "schema": "Filing",
+      "description": "Collection of retrieved and processed SEC filings."
+    }
+  }
+}

@@ -1,0 +1,63 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: tickers
+    // Document ID: tickerId
+    // Fields:
+    //   - id: string (required)
+    //   - symbol: string (required)
+    //   - name: string (optional)
+    //   - addedAt: string (required)
+    //   - addedBy: string (required)
+    //   - generatePodcast: int (optional)
+    //   - generateShorts: int (optional)
+    //
+    // Collection: filings
+    // Document ID: filingId
+    // Fields:
+    //   - id: string (required)
+    //   - ticker: string (required)
+    //   - formType: string (required)
+    //   - filingDate: string (required)
+    //   - accessionNumber: string (required)
+    //   - url: string (required)
+    //   - status: string (required)
+    //   - createdAt: string (required)
+    //   ... other optional fields
+    //
+    // ===============================================================
+
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && 
+        (request.auth.token.email == "dpnsght@gmail.com" || 
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin');
+    }
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    match /tickers/{tickerId} {
+      allow read, write: if true;
+    }
+
+    match /filings/{filingId} {
+      allow read, write: if true;
+    }
+    
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (request.auth.uid == userId || isAdmin());
+      allow write: if isAdmin();
+    }
+  }
+}

@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-serif: "Cormorant Garamond", serif;
+  --font-display: "Playfair Display", serif;
+}
+
+:root {
+  background-color: #020617;
+  color: #f8fafc;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  @apply antialiased selection:bg-blue-500/30;
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-2xl;
+  }
+  
+  .human-touch-text {
+    @apply font-serif italic text-slate-300;
+  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.markdown-body {
+  @apply text-slate-300 leading-relaxed font-sans;
+}
+
+.markdown-body h1, .markdown-body h2, .markdown-body h3 {
+  @apply text-white font-bold mt-6 mb-4 font-display;
+}
+
+.markdown-body p {
+  @apply mb-4;
+}
+
+.markdown-body ul {
+  @apply list-disc pl-6 mb-4;
+}
+
+.markdown-body li {
+  @apply mb-2;
+}

@@ -1,0 +1,5 @@
+{
+  "name": "Deep Insight",
+  "description": "Monitors SEC 10-K/10-Q filings, generates a 3-host podcast summary using AI, and uploads to YouTube.",
+  "requestFramePermissions": []
+}
