@@ -15085,3 +15085,193 @@ Please retry in 12h44m15.155169136s. [{"@type":"type.googleapis.com/google.rpc.H
 [2026-04-14T11:18:49.505Z] [PROCESSOR] Agent 2 (Podcast) starting segmented scripting...
 [2026-04-14T11:18:49.509Z] [PROCESSOR] Scripting beat: The $50 Billion Signal...
 [2026-04-14T11:18:54.523Z] [HTTP] GET /api/filings
+[2026-04-21T06:55:02.778Z] [SQLITE] Database initialized and healthy.
+[2026-04-21T06:55:02.780Z] [SQLITE] Database is empty. Seeding default tickers (NFLX, CRM, META)...
+[2026-04-21T06:55:02.781Z] [SERVER] Starting up... Process ID: k6da69, Project: leafy-bond-493102-v8
+[2026-04-21T06:55:02.782Z] [AUTH] Gemini Key Source: Firebase Config (AIzaSy...gSm0)
+[2026-04-21T06:55:02.782Z] [AUTH] Gemini Key Source: Firebase Config (AIzaSy...gSm0)
+[2026-04-21T06:55:03.110Z] [SQLITE-WORKER] Starting background filing processor...
+[2026-04-21T06:55:03.111Z] [SQLITE-WORKER] Checking for new SEC filings...
+[2026-04-21T06:55:03.111Z] [SQLITE-SEC] Checking NFLX...
+[2026-04-21T06:55:03.130Z] [SERVER] Successfully listening on http://localhost:3000 (Process: k6da69)
+[2026-04-21T06:55:03.345Z] [HTTP] GET /
+[2026-04-21T06:55:05.010Z] [SQLITE-SEC] Found new 10-Q for NFLX (0001065280-26-000138)
+[2026-04-21T06:55:05.010Z] [SQLITE-SEC] Found new 10-K for NFLX (0001065280-26-000034)
+[2026-04-21T06:55:07.011Z] [SQLITE-SEC] Checking CRM...
+[2026-04-21T06:55:07.391Z] [SQLITE-SEC] Found new 10-K for CRM (0001108524-26-000060)
+[2026-04-21T06:55:07.392Z] [SQLITE-SEC] Found new 10-Q for CRM (0001108524-25-000238)
+[2026-04-21T06:55:09.393Z] [SQLITE-SEC] Checking META...
+[2026-04-21T06:55:09.762Z] [SQLITE-SEC] Found new 10-K for META (0001628280-26-003942)
+[2026-04-21T06:55:09.762Z] [SQLITE-SEC] Found new 10-Q for META (0001628280-25-047240)
+[2026-04-21T06:55:10.769Z] [HTTP] GET /
+[2026-04-21T06:55:10.946Z] [HTTP] GET /@react-refresh
+[2026-04-21T06:55:11.167Z] [HTTP] GET /node_modules/vite/dist/client/env.mjs
+[2026-04-21T06:55:11.204Z] [HTTP] GET /node_modules/.vite/deps/react_jsx-dev-runtime.js?v=ed0499e5
+[2026-04-21T06:55:11.211Z] [HTTP] GET /node_modules/.vite/deps/react-dom_client.js?v=9bbc21db
+[2026-04-21T06:55:11.220Z] [HTTP] GET /node_modules/.vite/deps/react.js?v=ed0499e5
+[2026-04-21T06:55:11.280Z] [HTTP] GET /node_modules/.vite/deps/react-router-dom.js?v=0d299430
+[2026-04-21T06:55:11.286Z] [HTTP] GET /node_modules/.vite/deps/lucide-react.js?v=4378f2ba
+[2026-04-21T06:55:11.297Z] [HTTP] GET /node_modules/.vite/deps/chunk-2TUXWMP5.js?v=6ac212aa
+[2026-04-21T06:55:11.301Z] [HTTP] GET /node_modules/.vite/deps/chunk-EUHAVL2Q.js?v=6ac212aa
+[2026-04-21T06:55:11.486Z] [HTTP] GET /node_modules/.vite/deps/firebase_auth.js?v=a714d4e2
+[2026-04-21T06:55:11.519Z] [HTTP] GET /node_modules/.vite/deps/motion_react.js?v=1a14e665
+[2026-04-21T06:55:11.522Z] [HTTP] GET /node_modules/.vite/deps/react-markdown.js?v=5676bc9c
+[2026-04-21T06:55:11.542Z] [HTTP] GET /node_modules/.vite/deps/chunk-5MXL5BYH.js?v=6ac212aa
+[2026-04-21T06:55:11.600Z] [HTTP] GET /node_modules/.vite/deps/firebase_app.js?v=1fd2aa17
+[2026-04-21T06:55:11.602Z] [HTTP] GET /firebase-applet-config.json?import
+[2026-04-21T06:55:11.604Z] [HTTP] GET /node_modules/.vite/deps/firebase_firestore.js?v=f89557db
+[2026-04-21T06:55:11.647Z] [HTTP] GET /node_modules/.vite/deps/chunk-FLOGZC6U.js?v=6ac212aa
+[2026-04-21T06:55:11.687Z] [HTTP] GET /node_modules/.vite/deps/chunk-BCIG5HOZ.js?v=6ac212aa
+[2026-04-21T06:55:11.764Z] [SQLITE-WORKER] Checking for new SEC filings...
+[2026-04-21T06:55:11.765Z] [SQLITE-SEC] Checking NFLX...
+[2026-04-21T06:55:14.078Z] [SQLITE-SEC] Checking CRM...
+[2026-04-21T06:55:16.433Z] [SQLITE-SEC] Checking META...
+[2026-04-21T06:55:18.787Z] [SQLITE-WORKER] Querying for pending filings...
+[2026-04-21T06:55:18.788Z] [SQLITE-WORKER] Found pending filing: NFLX 10-Q
+[2026-04-21T06:55:18.789Z] [PROCESSOR] Starting multi-agent pipeline for NFLX...
+[2026-04-21T06:55:18.789Z] [PROCESSOR] Fetching real SEC content from https://www.sec.gov/Archives/edgar/data/1065280/000106528026000138/nflx-20260331.htm...
+[2026-04-21T06:55:19.063Z] [PROCESSOR] Successfully fetched and parsed 115177 characters of content.
+[2026-04-21T06:55:19.064Z] [PROCESSOR] Agent 0 (Architect) starting...
+[2026-04-21T06:55:19.143Z] [PROCESSOR] Architect failed with grounding: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent: [403 Forbidden] Permission denied: Consumer 'api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0' has been suspended. [{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"CONSUMER_SUSPENDED","domain":"googleapis.com","metadata":{"containerInfo":"api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0","service":"generativelanguage.googleapis.com","consumer":"projects/91375664712"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Permission denied: Consumer 'api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0' has been suspended."}]. Retrying without...
+[2026-04-21T06:55:22.711Z] [HTTP] GET /api/filings
+[2026-04-21T06:55:22.819Z] [HTTP] GET /api/filings
+[2026-04-21T06:55:25.135Z] [SQLITE-WORKER] Error processing NFLX: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent: [403 Forbidden] Permission denied: Consumer 'api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0' has been suspended. [{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"CONSUMER_SUSPENDED","domain":"googleapis.com","metadata":{"containerInfo":"api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0","consumer":"projects/91375664712","service":"generativelanguage.googleapis.com"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Permission denied: Consumer 'api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0' has been suspended."}]
+[2026-04-21T06:55:33.065Z] [HTTP] GET /api/filings
+[2026-04-21T06:55:43.042Z] [HTTP] GET /api/filings
+[2026-04-21T06:55:53.042Z] [HTTP] GET /api/filings
+[2026-04-21T06:56:02.721Z] [HTTP] GET /api/filings
+[2026-04-21T06:56:12.728Z] [HTTP] GET /api/filings
+[2026-04-21T06:56:22.712Z] [HTTP] GET /api/filings
+[2026-04-21T06:56:25.137Z] [SQLITE-WORKER] Checking for new SEC filings...
+[2026-04-21T06:56:25.137Z] [SQLITE-SEC] Checking NFLX...
+[2026-04-21T06:56:28.392Z] [SQLITE-SEC] Checking CRM...
+[2026-04-21T06:56:30.956Z] [SQLITE-SEC] Checking META...
+[2026-04-21T06:56:32.726Z] [HTTP] GET /api/filings
+[2026-04-21T06:56:33.527Z] [SQLITE-WORKER] Querying for pending filings...
+[2026-04-21T06:56:33.528Z] [SQLITE-WORKER] Found pending filing: NFLX 10-K
+[2026-04-21T06:56:33.528Z] [PROCESSOR] Starting multi-agent pipeline for NFLX...
+[2026-04-21T06:56:33.528Z] [PROCESSOR] Fetching real SEC content from https://www.sec.gov/Archives/edgar/data/1065280/000106528026000034/nflx-20251231.htm...
+[2026-04-21T06:56:34.087Z] [PROCESSOR] Successfully fetched and parsed 303996 characters of content.
+[2026-04-21T06:56:34.088Z] [PROCESSOR] Agent 0 (Architect) starting...
+[2026-04-21T06:56:34.171Z] [PROCESSOR] Architect failed with grounding: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent: [403 Forbidden] Permission denied: Consumer 'api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0' has been suspended. [{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"CONSUMER_SUSPENDED","domain":"googleapis.com","metadata":{"service":"generativelanguage.googleapis.com","consumer":"projects/91375664712","containerInfo":"api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Permission denied: Consumer 'api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0' has been suspended."}]. Retrying without...
+[2026-04-21T06:56:40.148Z] [SQLITE-WORKER] Error processing NFLX: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent: [403 Forbidden] Permission denied: Consumer 'api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0' has been suspended. [{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"CONSUMER_SUSPENDED","domain":"googleapis.com","metadata":{"service":"generativelanguage.googleapis.com","consumer":"projects/91375664712","containerInfo":"api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Permission denied: Consumer 'api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0' has been suspended."}]
+[2026-04-21T06:56:42.715Z] [HTTP] GET /api/filings
+[2026-04-21T06:56:52.719Z] [HTTP] GET /api/filings
+[2026-04-21T06:57:02.721Z] [HTTP] GET /api/filings
+[2026-04-21T06:57:12.726Z] [HTTP] GET /api/filings
+[2026-04-21T06:57:22.722Z] [HTTP] GET /api/filings
+[2026-04-21T06:57:32.722Z] [HTTP] GET /api/filings
+[2026-04-21T06:57:40.150Z] [SQLITE-WORKER] Checking for new SEC filings...
+[2026-04-21T06:57:40.151Z] [SQLITE-SEC] Checking NFLX...
+[2026-04-21T06:57:42.714Z] [HTTP] GET /api/filings
+[2026-04-21T06:57:43.377Z] [SQLITE-SEC] Checking CRM...
+[2026-04-21T06:57:45.941Z] [SQLITE-SEC] Checking META...
+[2026-04-21T06:57:48.616Z] [SQLITE-WORKER] Querying for pending filings...
+[2026-04-21T06:57:48.617Z] [SQLITE-WORKER] Found pending filing: CRM 10-K
+[2026-04-21T06:57:48.617Z] [PROCESSOR] Starting multi-agent pipeline for CRM...
+[2026-04-21T06:57:48.617Z] [PROCESSOR] Fetching real SEC content from https://www.sec.gov/Archives/edgar/data/1108524/000110852426000060/crm-20260131.htm...
+[2026-04-21T06:57:49.644Z] [PROCESSOR] Successfully fetched and parsed 432705 characters of content.
+[2026-04-21T06:57:49.645Z] [PROCESSOR] Agent 0 (Architect) starting...
+[2026-04-21T06:57:49.736Z] [PROCESSOR] Architect failed with grounding: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent: [403 Forbidden] Permission denied: Consumer 'api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0' has been suspended. [{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"CONSUMER_SUSPENDED","domain":"googleapis.com","metadata":{"service":"generativelanguage.googleapis.com","containerInfo":"api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0","consumer":"projects/91375664712"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Permission denied: Consumer 'api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0' has been suspended."}]. Retrying without...
+[2026-04-21T06:57:52.733Z] [HTTP] GET /api/filings
+[2026-04-21T06:57:55.716Z] [SQLITE-WORKER] Error processing CRM: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent: [403 Forbidden] Permission denied: Consumer 'api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0' has been suspended. [{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"CONSUMER_SUSPENDED","domain":"googleapis.com","metadata":{"containerInfo":"api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0","service":"generativelanguage.googleapis.com","consumer":"projects/91375664712"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Permission denied: Consumer 'api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0' has been suspended."}]
+[2026-04-21T06:58:03.030Z] [HTTP] GET /api/filings
+[2026-04-21T06:58:13.045Z] [HTTP] GET /api/filings
+[2026-04-21T06:58:23.050Z] [HTTP] GET /api/filings
+[2026-04-21T06:58:33.037Z] [HTTP] GET /api/filings
+[2026-04-21T06:58:42.707Z] [HTTP] GET /api/filings
+[2026-04-21T06:58:52.730Z] [HTTP] GET /api/filings
+[2026-04-21T06:58:55.716Z] [SQLITE-WORKER] Checking for new SEC filings...
+[2026-04-21T06:58:55.717Z] [SQLITE-SEC] Checking NFLX...
+[2026-04-21T06:58:59.203Z] [SQLITE-SEC] Checking CRM...
+[2026-04-21T06:59:01.780Z] [SQLITE-SEC] Checking META...
+[2026-04-21T06:59:02.709Z] [HTTP] GET /api/filings
+[2026-04-21T06:59:04.337Z] [SQLITE-WORKER] Querying for pending filings...
+[2026-04-21T06:59:04.338Z] [SQLITE-WORKER] Found pending filing: CRM 10-Q
+[2026-04-21T06:59:04.338Z] [PROCESSOR] Starting multi-agent pipeline for CRM...
+[2026-04-21T06:59:04.338Z] [PROCESSOR] Fetching real SEC content from https://www.sec.gov/Archives/edgar/data/1108524/000110852425000238/crm-20251031.htm...
+[2026-04-21T06:59:04.951Z] [PROCESSOR] Successfully fetched and parsed 320562 characters of content.
+[2026-04-21T06:59:04.952Z] [PROCESSOR] Agent 0 (Architect) starting...
+[2026-04-21T06:59:05.033Z] [PROCESSOR] Architect failed with grounding: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent: [403 Forbidden] Permission denied: Consumer 'api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0' has been suspended. [{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"CONSUMER_SUSPENDED","domain":"googleapis.com","metadata":{"consumer":"projects/91375664712","service":"generativelanguage.googleapis.com","containerInfo":"api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Permission denied: Consumer 'api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0' has been suspended."}]. Retrying without...
+[2026-04-21T06:59:11.023Z] [SQLITE-WORKER] Error processing CRM: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent: [403 Forbidden] Permission denied: Consumer 'api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0' has been suspended. [{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"CONSUMER_SUSPENDED","domain":"googleapis.com","metadata":{"containerInfo":"api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0","consumer":"projects/91375664712","service":"generativelanguage.googleapis.com"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Permission denied: Consumer 'api_key:AIzaSyAvsPMyXXGhYHVF0aETB60gT33rICEgSm0' has been suspended."}]
+[2026-04-21T06:59:12.718Z] [HTTP] GET /api/filings
+[2026-04-21T06:59:22.719Z] [HTTP] GET /api/filings
+[2026-04-21T06:59:32.725Z] [HTTP] GET /api/filings
+[2026-04-21T06:59:36.103Z] [HTTP] GET /api/tickers
+[2026-04-21T06:59:36.103Z] [API] GET /api/tickers
+[2026-04-21T06:59:36.195Z] [HTTP] GET /api/tickers
+[2026-04-21T06:59:36.196Z] [API] GET /api/tickers
+[2026-04-21T06:59:41.077Z] [HTTP] GET /api/tickers
+[2026-04-21T06:59:41.077Z] [API] GET /api/tickers
+[2026-04-21T06:59:41.766Z] [HTTP] DELETE /api/tickers/exe41u0xy
+[2026-04-21T06:59:46.111Z] [HTTP] GET /api/tickers
+[2026-04-21T06:59:46.111Z] [API] GET /api/tickers
+[2026-04-21T06:59:47.432Z] [HTTP] DELETE /api/tickers/zg8dvulkv
+[2026-04-21T06:59:50.191Z] [HTTP] DELETE /api/tickers/g5mp16sr5
+[2026-04-21T06:59:51.086Z] [HTTP] GET /api/tickers
+[2026-04-21T06:59:51.086Z] [API] GET /api/tickers
+[2026-04-21T06:59:53.716Z] [HTTP] GET /api/filings
+[2026-04-21T06:59:53.798Z] [HTTP] GET /api/filings
+[2026-04-21T06:59:55.916Z] [HTTP] GET /api/tickers
+[2026-04-21T06:59:55.917Z] [API] GET /api/tickers
+[2026-04-21T06:59:56.015Z] [HTTP] GET /api/tickers
+[2026-04-21T06:59:56.015Z] [API] GET /api/tickers
+[2026-04-21T07:00:00.938Z] [HTTP] GET /api/tickers
+[2026-04-21T07:00:00.938Z] [API] GET /api/tickers
+[2026-04-21T07:00:05.916Z] [HTTP] GET /api/tickers
+[2026-04-21T07:00:05.917Z] [API] GET /api/tickers
+[2026-04-21T07:00:11.025Z] [SQLITE-WORKER] Checking for new SEC filings...
+[2026-04-21T07:00:11.025Z] [SQLITE-WORKER] Querying for pending filings...
+[2026-04-21T07:00:11.026Z] [SQLITE-WORKER] No pending filings found.
+[2026-04-21T07:00:11.345Z] [HTTP] GET /api/tickers
+[2026-04-21T07:00:11.345Z] [API] GET /api/tickers
+[2026-04-21T07:00:15.946Z] [HTTP] GET /api/tickers
+[2026-04-21T07:00:15.946Z] [API] GET /api/tickers
+[2026-04-21T07:00:20.926Z] [HTTP] GET /api/tickers
+[2026-04-21T07:00:20.927Z] [API] GET /api/tickers
+[2026-04-21T07:00:25.936Z] [HTTP] GET /api/tickers
+[2026-04-21T07:00:25.936Z] [API] GET /api/tickers
+[2026-04-21T07:00:30.943Z] [HTTP] GET /api/tickers
+[2026-04-21T07:00:30.943Z] [API] GET /api/tickers
+[2026-04-21T07:00:35.921Z] [HTTP] GET /api/tickers
+[2026-04-21T07:00:35.921Z] [API] GET /api/tickers
+[2026-04-21T07:00:40.935Z] [HTTP] GET /api/tickers
+[2026-04-21T07:00:40.935Z] [API] GET /api/tickers
+[2026-04-21T07:00:45.922Z] [HTTP] GET /api/tickers
+[2026-04-21T07:00:45.923Z] [API] GET /api/tickers
+[2026-04-21T07:00:50.935Z] [HTTP] GET /api/tickers
+[2026-04-21T07:00:50.936Z] [API] GET /api/tickers
+[2026-04-21T07:00:55.932Z] [HTTP] GET /api/tickers
+[2026-04-21T07:00:55.932Z] [API] GET /api/tickers
+[2026-04-21T07:01:00.920Z] [HTTP] GET /api/tickers
+[2026-04-21T07:01:00.920Z] [API] GET /api/tickers
+[2026-04-21T07:01:05.924Z] [HTTP] GET /api/tickers
+[2026-04-21T07:01:05.924Z] [API] GET /api/tickers
+[2026-04-21T07:01:10.916Z] [HTTP] GET /api/tickers
+[2026-04-21T07:01:10.916Z] [API] GET /api/tickers
+[2026-04-21T07:01:11.026Z] [SQLITE-WORKER] Checking for new SEC filings...
+[2026-04-21T07:01:11.027Z] [SQLITE-WORKER] Querying for pending filings...
+[2026-04-21T07:01:11.027Z] [SQLITE-WORKER] No pending filings found.
+[2026-04-21T07:01:15.950Z] [HTTP] GET /api/tickers
+[2026-04-21T07:01:15.950Z] [API] GET /api/tickers
+[2026-04-21T07:01:20.950Z] [HTTP] GET /api/tickers
+[2026-04-21T07:01:20.951Z] [API] GET /api/tickers
+[2026-04-21T07:01:25.928Z] [HTTP] GET /api/tickers
+[2026-04-21T07:01:25.928Z] [API] GET /api/tickers
+[2026-04-21T07:01:30.916Z] [HTTP] GET /api/tickers
+[2026-04-21T07:01:30.916Z] [API] GET /api/tickers
+[2026-04-21T07:01:35.918Z] [HTTP] GET /api/tickers
+[2026-04-21T07:01:35.918Z] [API] GET /api/tickers
+[2026-04-21T07:01:40.931Z] [HTTP] GET /api/tickers
+[2026-04-21T07:01:40.931Z] [API] GET /api/tickers
+[2026-04-21T07:01:45.827Z] [HTTP] POST /api/tickers
+[2026-04-21T07:01:45.827Z] [API] Received request to add ticker: GE
+[2026-04-21T07:01:45.827Z] [API] Checking if GE exists in SQLite...
+[2026-04-21T07:01:45.828Z] [API] Inserting GE into SQLite...
+[2026-04-21T07:01:45.828Z] [API] Successfully added GE with ID l9kmycfkc
+[2026-04-21T07:01:45.941Z] [HTTP] GET /api/tickers
+[2026-04-21T07:01:45.942Z] [API] GET /api/tickers
+[2026-04-21T07:01:50.936Z] [HTTP] GET /api/tickers
+[2026-04-21T07:01:50.936Z] [API] GET /api/tickers
+[2026-04-21T07:01:51.096Z] [HTTP] GET /api/filings
+[2026-04-21T07:01:51.187Z] [HTTP] GET /api/filings

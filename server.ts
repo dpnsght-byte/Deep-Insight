@@ -179,6 +179,10 @@ try {
   sqlite.prepare("ALTER TABLE tickers ADD COLUMN voiceModel TEXT DEFAULT 'studio'").run();
 } catch (e) {}
 
+try {
+  sqlite.prepare("ALTER TABLE filings ADD COLUMN companyName TEXT").run();
+} catch (e) {}
+
 // Seed default tickers if empty
 try {
   const tickerCount = sqlite.prepare("SELECT COUNT(*) as count FROM tickers").get() as any;
@@ -532,15 +536,26 @@ const getBestKey = () => {
   const envKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
   const fbKey = firebaseConfig.apiKey;
   
-  // Ignore empty strings or placeholders
-  const isValid = (k: string | undefined) => k && k.length > 20 && !k.includes("YOUR_") && !k.includes("DUMMY");
+  const isValid = (k: string | undefined, name: string) => {
+    if (!k || k.length <= 20 || k.includes("YOUR_") || k.includes("DUMMY")) {
+      return false;
+    }
+    return true;
+  };
+
+  const envKeyName = process.env.GEMINI_API_KEY ? "GEMINI_API_KEY" : (process.env.GOOGLE_API_KEY ? "GOOGLE_API_KEY" : "Environment Key");
   
-  const key = isValid(envKey) ? envKey : (isValid(fbKey) ? fbKey : "DUMMY_KEY");
+  const useEnv = isValid(envKey, envKeyName);
+  const useFb = !useEnv && isValid(fbKey, "Firebase Config Key");
+
+  const key = useEnv ? envKey : (useFb ? fbKey : "DUMMY_KEY");
   
   if (key !== "DUMMY_KEY") {
-    const source = key === envKey ? "Environment" : "Firebase Config";
+    const source = useEnv ? envKeyName : "Firebase Config";
     const masked = key!.substring(0, 6) + "..." + key!.substring(key!.length - 4);
     log(`[AUTH] Gemini Key Source: ${source} (${masked})`);
+  } else {
+    log(`[AUTH] No valid Gemini key found. Falling back to DUMMY_KEY.`);
   }
   return key!;
 };
@@ -985,9 +1000,10 @@ Return a JSON object:
     { "title": "The Macro Context", "focus": "Interest rates, geopolitical factors, or regulatory headwinds" },
     { "title": "The Bear Case", "focus": "Critical risks, competitive threats, and tail risks" },
     { "title": "The Verdict", "focus": "Investment thesis and long-term outlook" }
-  ], // Generate 8-10 distinct beats to cover 2500-4000 words.
+  ], // Generate 3-5 distinct beats to cover 3-5 minutes of audio.
   "shortsHook": "The most explosive insight for a 30s viral clip",
-  "sentiment": "bullish/bearish/neutral"
+  "sentiment": "bullish/bearish/neutral",
+  "companyName": "Legal Company Name from Filing"
 }`;
 
   let architectResult;
@@ -1004,7 +1020,10 @@ Return a JSON object:
   }
   
   const missionDoc = JSON.parse(sanitizeJson(architectResult.text()));
-  log(`[PROCESSOR] Mission Document created. Narrative: ${missionDoc.narrative}`);
+  log(`[PROCESSOR] Mission Document created for ${missionDoc.companyName}. Narrative: ${missionDoc.narrative}`);
+
+  // Update companyName in DB
+  sqlite.prepare("UPDATE filings SET companyName = ? WHERE id = ?").run(missionDoc.companyName || filing.ticker, filing.id);
 
   log(`[PROCESSOR] Agent 1 (Analyst) starting...`);
   sqlite.prepare("UPDATE filings SET status = ?, currentStep = 2 WHERE id = ?").run('analyst_working', filing.id);
@@ -1060,7 +1079,7 @@ TONE & STYLE (CRITICAL: MAKE IT SOUND HUMAN, NOT A SCRIPT):
 - Include rhetorical questions and "verbal italics" to emphasize key numbers.
 - It should feel like a high-stakes, unscripted debate between two people who live and breathe the markets.
 
-This segment should be roughly 400-600 words.
+This segment should be roughly 150-200 words.
 Return ONLY a valid JSON object. Do not include any other text.
 JSON Structure:
 {
@@ -1094,6 +1113,12 @@ JSON Structure:
     sqlite.prepare("UPDATE filings SET status = ?, currentStep = 1, totalSteps = 1 WHERE id = ?").run('shorts_scripting', filing.id);
     const shortsPrompt = `Create a 30-second viral short script based on this Mission: ${JSON.stringify(missionDoc)}. 
 Hook: ${missionDoc.shortsHook}
+
+CONSTRAINTS:
+- Duration: EXACTLY 25-30 seconds.
+- Word count: Approx 70-85 words.
+- Pacing: High-energy, rapid-fire.
+
 Return JSON: { "shortsScript": "...", "visualText1": "...", "visualText2": "...", "visualText3": "..." }`;
     
     let shortsResult;
@@ -1218,14 +1243,14 @@ Return JSON: { "shortsScript": "...", "visualText1": "...", "visualText2": "..."
     const payload = {
       filingId: filing.id,
       ticker: filing.ticker,
-      companyName: filing.companyName || filing.ticker,
+      companyName: missionDoc.companyName || filing.ticker,
       formType: filing.formType,
       reportDate: filing.filingDate,
       isAudited: true, // Defaulting to true as per prompt requirement
-      narrative: analystData.summary,
+      narrative: missionDoc.narrative,
       audioUrl: `${APP_URL}/media/audio/${audioBase64}`,
       shortAudioUrl: `${APP_URL}/media/shorts/${shortsAudioBase64}`,
-      thumbnailUrl: `${APP_URL}/media/images/${filing.id}.png`, // Assuming thumbnail exists
+      thumbnailUrl: `${APP_URL}/media/images/${filing.id}.png`,
       script: podcastScript,
       forcePublish: true
     };
