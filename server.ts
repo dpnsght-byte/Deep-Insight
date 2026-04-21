@@ -533,7 +533,7 @@ const PROCESS_ID = Math.random().toString(36).substring(2, 8);
 log(`[SERVER] Starting up... Process ID: ${PROCESS_ID}, Project: ${firebaseConfig.projectId}`);
 
 const getBestKey = () => {
-  const envKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+  const envKey = process.env.CUSTOM_GEMINI_API_KEY || process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
   const fbKey = firebaseConfig.apiKey;
   
   const isValid = (k: string | undefined, name: string) => {
@@ -543,7 +543,7 @@ const getBestKey = () => {
     return true;
   };
 
-  const envKeyName = process.env.GEMINI_API_KEY ? "GEMINI_API_KEY" : (process.env.GOOGLE_API_KEY ? "GOOGLE_API_KEY" : "Environment Key");
+  const envKeyName = process.env.CUSTOM_GEMINI_API_KEY ? "CUSTOM_GEMINI_API_KEY" : (process.env.GEMINI_API_KEY ? "GEMINI_API_KEY" : (process.env.GOOGLE_API_KEY ? "GOOGLE_API_KEY" : "Environment Key"));
   
   const useEnv = isValid(envKey, envKeyName);
   const useFb = !useEnv && isValid(fbKey, "Firebase Config Key");
@@ -748,6 +748,20 @@ app.delete("/api/tickers/:id", async (req, res) => {
   }
 });
 
+app.get("/api/admin/status", (req, res) => {
+  const key = getBestKey();
+  const isCustom = !!process.env.CUSTOM_GEMINI_API_KEY;
+  const isStandardEnv = !!process.env.GEMINI_API_KEY;
+  
+  res.json({
+    keyDetected: key !== "DUMMY_KEY",
+    keySource: isCustom ? "CUSTOM_GEMINI_API_KEY" : (isStandardEnv ? "GEMINI_API_KEY" : "Firebase Fallback"),
+    keyLength: key.length,
+    isPlaceholder: key.includes("YOUR_") || key.includes("DUMMY"),
+    isSuspendedFallback: key === firebaseConfig.apiKey // If it's using the FB key, it's likely suspended
+  });
+});
+
 app.post("/api/admin/wipe", async (req, res) => {
   try {
     log("[ADMIN] Wiping SQLite database...");
@@ -883,12 +897,18 @@ async function startBackgroundWorker() {
           await processFilingInternal(pending);
         } catch (err: any) {
           let friendlyError = err.message || 'Unknown error';
-          if (friendlyError.includes('API_KEY_SERVICE_BLOCKED')) {
-            friendlyError = 'Gemini API is blocked. Please enable the "Generative Language API" in your Google Cloud Console for project gen-lang-client-0045219762.';
+          const hasCustomKey = !!process.env.CUSTOM_GEMINI_API_KEY;
+
+          if (friendlyError.includes('CONSUMER_SUSPENDED') || friendlyError.includes('suspended')) {
+            friendlyError = `API Access Suspended: The current Gemini API key is blocked by Google. ${hasCustomKey ? 'Your CUSTOM_GEMINI_API_KEY may have issues.' : 'Please add a new key in Settings as CUSTOM_GEMINI_API_KEY to resume.'}`;
+          } else if (friendlyError.includes('API_KEY_INVALID') || friendlyError.includes('expired')) {
+            friendlyError = `API Key Expired/Invalid: Please renew your API key. ${hasCustomKey ? 'Check your CUSTOM_GEMINI_API_KEY in Settings.' : 'Add your new key as CUSTOM_GEMINI_API_KEY in Settings.'}`;
+          } else if (friendlyError.includes('API_KEY_SERVICE_BLOCKED')) {
+            friendlyError = 'Gemini API is blocked. Please enable the "Generative Language API" in your Google Cloud Console.';
           } else if (friendlyError.includes('BILLING_DISABLED')) {
-            friendlyError = 'Vertex AI requires billing. Please enable billing for project gen-lang-client-0045219762 or enable the free "Generative Language API" instead.';
+            friendlyError = 'Vertex AI requires billing. Please enable billing or provide a valid free-tier CUSTOM_GEMINI_API_KEY.';
           } else if (friendlyError.includes('PERMISSION_DENIED')) {
-            friendlyError = 'Permission Denied: Please ensure the necessary APIs are enabled and your API key is unrestricted.';
+            friendlyError = 'Permission Denied: Ensure your API key is correctly configured and restricted.';
           }
           
           log(`[SQLITE-WORKER] Error processing ${pending.ticker}: ${friendlyError}`);

@@ -9,6 +9,13 @@ const Admin: React.FC = () => {
   const [generateShorts, setGenerateShorts] = useState(true);
   const [voiceModel, setVoiceModel] = useState<'studio' | 'neural'>('studio');
   const [loading, setLoading] = useState(true);
+  const [apiStatus, setApiStatus] = useState<{
+    keyDetected: boolean;
+    keySource: string;
+    keyLength: number;
+    isPlaceholder: boolean;
+    isSuspendedFallback: boolean;
+  } | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
@@ -17,14 +24,20 @@ const Admin: React.FC = () => {
   useEffect(() => {
     const fetchTickers = async () => {
       try {
-        const response = await fetch('/api/tickers');
-        if (response.ok) {
-          const data = await response.json();
+        const [tickersRes, statusRes] = await Promise.all([
+          fetch('/api/tickers'),
+          fetch('/api/admin/status')
+        ]);
+        
+        if (tickersRes.ok) {
+          const data = await tickersRes.json();
           setTickers(data);
           setError(null);
-        } else {
-          const errorData = await response.json();
-          setError(errorData.error || 'Failed to fetch tickers');
+        }
+        
+        if (statusRes.ok) {
+          const statusData = await statusRes.json();
+          setApiStatus(statusData);
         }
       } catch (err: any) {
         console.error("Failed to fetch tickers:", err);
@@ -120,6 +133,37 @@ const Admin: React.FC = () => {
           <p className="text-slate-400">Manage monitored tickers and system configuration.</p>
         </div>
       </div>
+      
+      {/* API Health Status */}
+      {apiStatus && (
+        <div className={`p-4 rounded-xl border ${
+          (apiStatus.isSuspendedFallback || apiStatus.isPlaceholder || apiStatus.keyLength < 30)
+            ? 'bg-red-500/10 border-red-500/50 text-red-400'
+            : 'bg-emerald-500/10 border-emerald-500/50 text-emerald-400'
+        }`}>
+          <div className="flex items-center gap-3">
+            { (apiStatus.isSuspendedFallback || apiStatus.isPlaceholder || apiStatus.keyLength < 30) ? (
+              <AlertCircle className="w-6 h-6 flex-shrink-0" />
+            ) : (
+              <CheckCircle2 className="w-6 h-6 flex-shrink-0" />
+            )}
+            <div className="flex-1">
+              <h4 className="font-bold flex items-center gap-2">
+                Gemini API: { (apiStatus.isSuspendedFallback || apiStatus.isPlaceholder || apiStatus.keyLength < 30) ? 'Action Required' : 'Healthy' }
+                <span className="text-xs font-mono opacity-50 px-2 py-0.5 rounded bg-white/5 uppercase">
+                  Source: {apiStatus.keySource}
+                </span>
+              </h4>
+              <p className="text-sm opacity-80 mt-1">
+                {apiStatus.isSuspendedFallback && "The system is using the suspended Firebase fallback key. Please add 'CUSTOM_GEMINI_API_KEY' in Settings."}
+                {apiStatus.isPlaceholder && "Current key is a placeholder. Please provide a valid 39-character key."}
+                {apiStatus.keyLength < 30 && !apiStatus.isPlaceholder && !apiStatus.isSuspendedFallback && `The key provided is too short (${apiStatus.keyLength} chars). Expected 39 chars.`}
+                {!apiStatus.isSuspendedFallback && !apiStatus.isPlaceholder && apiStatus.keyLength >= 30 && "The system is correctly configured with your individual API key."}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Add Ticker Form */}
       <div className="bg-slate-900 border border-slate-800 p-6 rounded-xl shadow-xl">
